@@ -1,0 +1,127 @@
+---
+import { COMPANY, type Locale } from '../data/site';
+
+interface Props {
+  lang: Locale;
+}
+
+const { lang } = Astro.props;
+const homeHref = lang === 'fa' ? '/' : '/en/';
+
+const content = {
+  fa: {
+    back: 'بازگشت به صفحه اصلی',
+    eyebrow: 'اپلیکیشن موبایل بالینی · hamrah-iv.arshid.tech',
+    title: 'همراه IV (Hamrah-IV)',
+    subtitle: 'مرجع فارسی و آفلاین بررسی سازگاری داروهای تزریقی وریدی (IV Compatibility) برای داروسازان، پرستاران و کادر درمان.',
+    ctaEmail: 'درخواست نسخه سازمانی / دریافت فایل نصب',
+    featuresTitle: 'ویژگی‌های فنی و بالینی',
+    features: [
+      {
+        title: 'دیتابیس کاملاً آفلاین (SQLite)',
+        desc: 'جستجو و استعلام سازگاری جفت‌های دارویی بدون نیاز به اینترنت در بخش‌های بیمارستانی و مراقبت ویژه.',
+      },
+      {
+        title: 'تفکیک دقیق مسیر تزریق و وضعیت سازگاری',
+        desc: 'فیلتر سریع نتایج بر اساس وضعیت سازگاری، غلظت دارویی، مسیر تزریق (Y-Site، Admixture و ...) و یادداشت‌های بالینی فارسی.',
+      },
+      {
+        title: 'همگام‌سازی امن و نسخه‌بندی‌شده داده‌ها',
+        desc: 'به‌روزرسانی پایگاه داده از طریق Manifest معتبر با اعتبارسنجی آدرس و حفظ یکپارچگی دیتابیس محلی.',
+      },
+      {
+        title: 'طراحی شده برای استفاده سریع در شیفت‌های کاری',
+        desc: 'پشتیبانی از حالت روشن و تاریک، جستجوی هوشمند نام‌های دارویی و نمایش شفاف شواهد.',
+      },
+    ],
+    specsTitle: 'مشخصات فنی',
+    specs: [
+      ['پلتفرم', 'Android / iOS (React Native · Expo)'],
+      ['ذخیره‌سازی محلی', 'SQLite (آفلاین‌محور)'],
+      ['زبان رابط کاربری', 'فارسی (RTL) همراه با نام‌های استاندارد انگلیسی دارو'],
+      ['ساب‌دامین اختصاصی', 'hamrah-iv.arshid.tech'],
+    ],
+  },
+  en: {
+    back: 'Back to Home',
+    eyebrow: 'Mobile Clinical Application · hamrah-iv.arshid.tech',
+    title: 'Hamrah-IV',
+    subtitle: 'Offline-first Persian mobile reference for intravenous (IV) drug compatibility built for pharmacists, nurses, and hospital clinicians.',
+    ctaEmail: 'Request Institutional Build / APK Access',
+    featuresTitle: 'Clinical & Engineering Capabilities',
+    features: [
+      {
+        title: 'Fully Offline SQLite Database',
+        desc: 'Instant pairwise IV compatibility lookups with zero network dependency inside hospital wards and ICUs.',
+      },
+      {
+        title: 'Route-Aware Filtering & Clinical Notes',
+        desc: 'Filter compatibility outcomes by clinical route, drug concentration, and Persian clinical guidance notes.',
+      },
+      {
+        title: 'Verified Dataset Synchronization',
+        desc: 'Versioned database updates via trusted manifest validation and integrity checks to prevent partial writes.',
+      },
+      {
+        title: 'Built for Clinical Shift Speed',
+        desc: 'Light and dark themes, normalized search for drug names, and high-contrast compatibility indicators.',
+      },
+    ],
+    specsTitle: 'Technical Specifications',
+    specs: [
+      ['Platform', 'Android / iOS (React Native · Expo)'],
+      ['Local Storage', 'Embedded SQLite (Offline-First)'],
+      ['Interface Language', 'Persian (RTL) with standard international drug names'],
+      ['Dedicated Subdomain', 'hamrah-iv.arshid.tech'],
+    ],
+  },
+}[lang];
+---
+
+<section class="border-b border-border bg-surface py-14 sm:py-20">
+  <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+    <a href={homeHref} class="inline-flex items-center gap-1.5 text-xs font-semibold text-muted hover:text-primary">
+      <span aria-hidden="true">{lang === 'fa' ? '→' : '←'}</span>
+      <span>{content.back}</span>
+    </a>
+
+    <p class="mt-6 font-mono text-xs font-semibold text-accent">{content.eyebrow}</p>
+    <h1 class="mt-2 text-3xl font-extrabold tracking-tight text-ink sm:text-4xl">{content.title}</h1>
+    <p class="mt-4 text-base leading-8 text-muted sm:text-lg">{content.subtitle}</p>
+
+    <div class="mt-8 flex flex-wrap gap-3">
+      <a
+        href={`mailto:${COMPANY.email}?subject=Hamrah-IV%20Access`}
+        class="inline-flex items-center rounded bg-primary px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-primary-dark"
+      >
+        {content.ctaEmail}
+      </a>
+    </div>
+  </div>
+</section>
+
+<section class="py-14 sm:py-20">
+  <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+    <h2 class="text-xl font-bold text-ink sm:text-2xl">{content.featuresTitle}</h2>
+    <div class="mt-8 grid gap-6 sm:grid-cols-2">
+      {content.features.map((item) => (
+        <div class="rounded-md border border-border bg-surface p-6">
+          <h3 class="text-base font-bold text-ink">{item.title}</h3>
+          <p class="mt-2.5 text-sm leading-7 text-muted">{item.desc}</p>
+        </div>
+      ))}
+    </div>
+
+    <div class="mt-12 rounded-md border border-border bg-surface p-6">
+      <h2 class="text-lg font-bold text-ink">{content.specsTitle}</h2>
+      <dl class="mt-4 divide-y divide-border text-sm">
+        {content.specs.map(([label, value]) => (
+          <div class="grid gap-1 py-3 sm:grid-cols-3">
+            <dt class="font-medium text-ink">{label}</dt>
+            <dd class="text-muted sm:col-span-2">{value}</dd>
+          </div>
+        ))}
+      </dl>
+    </div>
+  </div>
+</section>

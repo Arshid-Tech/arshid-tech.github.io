@@ -1,0 +1,29 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import HamrahIVPage from '../../components/HamrahIVPage.astro';
+
+const appSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'SoftwareApplication',
+  name: 'Hamrah-IV',
+  applicationCategory: 'MedicalApplication',
+  operatingSystem: 'Android, iOS',
+  url: 'https://arshid.tech/products/hamrah-iv/',
+  publisher: {
+    '@type': 'Organization',
+    name: 'شرکت توسعه فناوری هوشمند آرشید',
+  },
+};
+---
+
+<BaseLayout
+  lang="fa"
+  title="همراه IV (Hamrah-IV) | اپلیکیشن بررسی سازگاری داروهای تزریقی — آرشید تک"
+  description="اپلیکیشن موبایل فارسی و آفلاین همراه IV برای بررسی سازگاری داروهای تزریقی وریدی (IV Compatibility) توسعه یافته توسط آرشید تک."
+  canonicalPath="/products/hamrah-iv/"
+  alternateFaPath="/products/hamrah-iv/"
+  alternateEnPath="/en/products/hamrah-iv/"
+  jsonLd={appSchema}
+>
+  <HamrahIVPage lang="fa" />
+</BaseLayout>

@@ -1,0 +1,121 @@
+@import "tailwindcss";
+
+@theme {
+  --color-primary: #0F4C5C;
+  --color-primary-dark: #0A3743;
+  --color-accent: #0D9488;
+  --color-accent-soft: #F0FDFA;
+  --color-bg: #F8FAFC;
+  --color-surface: #FFFFFF;
+  --color-ink: #0F172A;
+  --color-muted: #475569;
+  --color-border: #E2E8F0;
+
+  --font-fa: "Vazirmatn", system-ui, -apple-system, sans-serif;
+  --font-en: "Inter", system-ui, -apple-system, sans-serif;
+}
+
+@layer base {
+  html {
+    background-color: var(--color-bg);
+    color: var(--color-ink);
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  html[lang="fa"] {
+    font-family: var(--font-fa);
+  }
+
+  html[lang="en"] {
+    font-family: var(--font-en);
+  }
+}
+
+.article-prose {
+  color: var(--color-ink);
+  line-height: 1.95;
+  font-size: 1.05rem;
+}
+
+.article-prose h2 {
+  font-size: 1.45rem;
+  font-weight: 700;
+  color: var(--color-ink);
+  margin-top: 2.25rem;
+  margin-bottom: 0.85rem;
+  letter-spacing: -0.01em;
+}
+
+.article-prose h3 {
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: var(--color-primary);
+  margin-top: 1.75rem;
+  margin-bottom: 0.65rem;
+}
+
+.article-prose p {
+  margin-bottom: 1.25rem;
+  color: #1E293B;
+}
+
+.article-prose ul,
+.article-prose ol {
+  margin-bottom: 1.25rem;
+  padding-inline-start: 1.5rem;
+}
+
+.article-prose ul {
+  list-style-type: disc;
+}
+
+.article-prose ol {
+  list-style-type: decimal;
+}
+
+.article-prose li {
+  margin-bottom: 0.5rem;
+  color: #1E293B;
+}
+
+.article-prose a {
+  color: var(--color-primary);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.article-prose blockquote {
+  border-inline-start: 3px solid var(--color-accent);
+  background-color: #FFFFFF;
+  padding: 0.9rem 1.2rem;
+  margin: 1.5rem 0;
+  color: var(--color-muted);
+}
+
+.article-prose code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 0.9em;
+  background-color: #F1F5F9;
+  padding: 0.15rem 0.35rem;
+  border-radius: 4px;
+  direction: ltr;
+  unicode-bidi: isolate;
+}
+
+.article-prose pre {
+  background-color: #0F172A;
+  color: #F8FAFC;
+  padding: 1rem 1.25rem;
+  border-radius: 6px;
+  overflow-x: auto;
+  margin: 1.5rem 0;
+  direction: ltr;
+  text-align: left;
+}
+
+.article-prose pre code {
+  background-color: transparent;
+  padding: 0;
+  color: inherit;
+}

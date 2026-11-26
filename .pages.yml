@@ -1,0 +1,86 @@
+media:
+  input: public/images/blog
+  output: /images/blog
+
+content:
+  - name: blog_fa
+    label: مقالات فارسی (Persian Blog)
+    type: collection
+    path: src/content/blog/fa
+    view:
+      fields: [title, pubDate, category, draft]
+    fields:
+      - name: title
+        label: عنوان مقاله
+        type: string
+        required: true
+      - name: description
+        label: توضیح سئو (Meta Description)
+        type: text
+        required: true
+      - name: pubDate
+        label: تاریخ انتشار
+        type: date
+        required: true
+      - name: category
+        label: دسته‌بندی
+        type: select
+        options:
+          values:
+            - مهندسی نرم‌افزار سلامت
+            - داروسازی دیجیتال
+            - معماری و زیرساخت
+            - اخبار آرشید تک
+        required: true
+      - name: author
+        label: نویسنده
+        type: string
+        default: تیم فنی آرشید تک
+      - name: draft
+        label: پیش‌نویس
+        type: boolean
+        default: false
+      - name: body
+        label: متن مقاله
+        type: rich-text
+
+  - name: blog_en
+    label: English Blog
+    type: collection
+    path: src/content/blog/en
+    view:
+      fields: [title, pubDate, category, draft]
+    fields:
+      - name: title
+        label: Title
+        type: string
+        required: true
+      - name: description
+        label: SEO Meta Description
+        type: text
+        required: true
+      - name: pubDate
+        label: Publish Date
+        type: date
+        required: true
+      - name: category
+        label: Category
+        type: select
+        options:
+          values:
+            - HealthTech Engineering
+            - Digital Pharmacy
+            - Architecture & Infrastructure
+            - Company Updates
+        required: true
+      - name: author
+        label: Author
+        type: string
+        default: Arshid Tech Engineering
+      - name: draft
+        label: Draft
+        type: boolean
+        default: false
+      - name: body
+        label: Body
+        type: rich-text

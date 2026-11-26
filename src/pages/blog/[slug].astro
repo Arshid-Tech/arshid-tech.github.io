@@ -1,0 +1,73 @@
+---
+import { getCollection, render } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog', ({ id, data }) => id.startsWith('fa/') && !data.draft);
+  return posts.map((post) => ({
+    params: { slug: post.id.replace('fa/', '') },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+const slug = post.id.replace('fa/', '');
+const formattedDate = new Intl.DateTimeFormat('fa-IR', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+}).format(post.data.pubDate);
+
+const articleSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BlogPosting',
+  headline: post.data.title,
+  description: post.data.description,
+  datePublished: post.data.pubDate.toISOString(),
+  author: {
+    '@type': 'Organization',
+    name: post.data.author,
+  },
+  inLanguage: 'fa-IR',
+};
+---
+
+<BaseLayout
+  lang="fa"
+  title={`${post.data.title} | وبلاگ آرشید تک`}
+  description={post.data.description}
+  canonicalPath={`/blog/${slug}/`}
+  alternateFaPath={`/blog/${slug}/`}
+  alternateEnPath={`/en/blog/`}
+  jsonLd={articleSchema}
+>
+  <article class="py-12 sm:py-16">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+      <a href="/blog/" class="inline-flex items-center gap-1.5 text-xs font-semibold text-muted hover:text-primary">
+        <span aria-hidden="true">→</span>
+        <span>بازگشت به وبلاگ</span>
+      </a>
+
+      <header class="mt-6 border-b border-border pb-8">
+        <div class="flex flex-wrap items-center gap-3 text-xs text-muted">
+          <span class="font-medium text-accent">{post.data.category}</span>
+          <span>•</span>
+          <time datetime={post.data.pubDate.toISOString()}>{formattedDate}</time>
+          <span>•</span>
+          <span>{post.data.author}</span>
+        </div>
+        <h1 class="mt-4 text-2xl font-extrabold leading-snug text-ink sm:text-3xl">
+          {post.data.title}
+        </h1>
+        <p class="mt-4 text-base leading-8 text-muted">
+          {post.data.description}
+        </p>
+      </header>
+
+      <div class="article-prose mt-8">
+        <Content />
+      </div>
+    </div>
+  </article>
+</BaseLayout>

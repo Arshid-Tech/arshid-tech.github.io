@@ -1,0 +1,29 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import HamrahIVPage from '../../../components/HamrahIVPage.astro';
+
+const appSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'SoftwareApplication',
+  name: 'Hamrah-IV',
+  applicationCategory: 'MedicalApplication',
+  operatingSystem: 'Android, iOS',
+  url: 'https://arshid.tech/en/products/hamrah-iv/',
+  publisher: {
+    '@type': 'Organization',
+    name: 'Arshid Smart Technology Development Co.',
+  },
+};
+---
+
+<BaseLayout
+  lang="en"
+  title="Hamrah-IV | Offline IV Drug Compatibility Mobile App — Arshid Tech"
+  description="Offline-first Persian mobile application for checking intravenous (IV) drug compatibility, developed by Arshid Tech."
+  canonicalPath="/en/products/hamrah-iv/"
+  alternateFaPath="/products/hamrah-iv/"
+  alternateEnPath="/en/products/hamrah-iv/"
+  jsonLd={appSchema}
+>
+  <HamrahIVPage lang="en" />
+</BaseLayout>

@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://arshid.tech/sitemap-index.xml

@@ -54,7 +54,7 @@ const arrow = lang === 'fa' ? '←' : '→';
             </p>
           </div>
 
-          <div class="mt-6 flex items-center justify-between border-t border-border pt-4 text-sm">
+          <div class="mt-6 flex items-center border-t border-border pt-4 text-sm">
             <a
               href={project.url[lang]}
               target={project.external ? '_blank' : undefined}
@@ -64,17 +64,6 @@ const arrow = lang === 'fa' ? '←' : '→';
               <span>{project.external ? labels.openPlatform : labels.viewDetails}</span>
               <span aria-hidden="true">{arrow}</span>
             </a>
-
-            {project.githubUrl && (
-              <a
-                href={project.githubUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                class="text-xs font-medium text-muted transition-colors hover:text-ink"
-              >
-                GitHub
-              </a>
-            )}
           </div>
         </article>
       ))}

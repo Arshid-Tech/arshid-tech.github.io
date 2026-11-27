@@ -15,7 +15,8 @@ const content = {
     eyebrow: 'اپلیکیشن موبایل بالینی · hamrah-iv.arshid.tech',
     title: 'همراه IV (Hamrah-IV)',
     subtitle: 'مرجع فارسی و آفلاین بررسی سازگاری داروهای تزریقی وریدی (IV Compatibility) برای داروسازان، پرستاران و کادر درمان.',
-    ctaEmail: 'درخواست دسترسی یا نسخه سازمانی',
+    ctaTelegram: 'پیام در تلگرام',
+    ctaEmail: 'ارسال ایمیل',
     featuresTitle: 'ویژگی‌های بالینی و فنی',
     features: [
       {
@@ -41,7 +42,8 @@ const content = {
     eyebrow: 'Mobile Clinical Application · hamrah-iv.arshid.tech',
     title: 'Hamrah-IV',
     subtitle: 'Offline-first Persian mobile reference for intravenous (IV) drug compatibility built for pharmacists, nurses, and hospital clinicians.',
-    ctaEmail: 'Request Institutional Access',
+    ctaTelegram: 'Message on Telegram',
+    ctaEmail: 'Email Us',
     featuresTitle: 'Clinical & Engineering Capabilities',
     features: [
       {
@@ -76,10 +78,18 @@ const content = {
     <h1 class="heading-editorial mt-3 text-3xl text-ink sm:text-5xl">{content.title}</h1>
     <p class="mt-5 text-base leading-8 text-muted sm:text-lg">{content.subtitle}</p>
 
-    <div class="mt-8">
+    <div class="mt-8 flex flex-wrap items-center gap-3">
+      <a
+        href={COMPANY.telegramDirect}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="inline-flex items-center gap-2 rounded-full bg-[#06323B] px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-[#094754] dark:bg-aqua dark:text-[#06323B] dark:hover:bg-aqua-hover"
+      >
+        <span>{content.ctaTelegram}</span>
+      </a>
       <a
         href={`mailto:${COMPANY.email}?subject=Hamrah-IV%20Access`}
-        class="inline-flex items-center rounded-full bg-[#06323B] px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-[#094754] dark:bg-aqua dark:text-[#06323B] dark:hover:bg-aqua-hover"
+        class="inline-flex items-center rounded-full border border-ink/25 bg-surface px-6 py-3 text-sm font-semibold text-ink transition-colors hover:border-accent hover:text-accent"
       >
         {content.ctaEmail}
       </a>

@@ -14,6 +14,7 @@ const logoSrc =
   lang === 'fa'
     ? '/images/brand/logo-horizontal-fa.svg'
     : '/images/brand/logo-horizontal-en.svg';
+const logoWidth = lang === 'fa' ? 226 : 233;
 ---
 
 <header class="sticky top-0 z-40 border-b border-border bg-surface/95 backdrop-blur-sm">
@@ -22,8 +23,8 @@ const logoSrc =
       <img
         src={logoSrc}
         alt={COMPANY.brand[lang]}
-        class="h-9 w-auto sm:h-10"
-        width="208"
+        class="h-10 w-auto sm:h-11"
+        width={logoWidth}
         height="104"
       />
     </a>

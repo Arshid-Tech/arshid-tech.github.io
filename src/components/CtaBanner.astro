@@ -12,26 +12,26 @@ const arrow = lang === 'fa' ? '←' : '→';
 ---
 
 <section class="cta-gradient text-white">
-  <div class="mx-auto max-w-6xl px-4 py-20 sm:px-6 lg:px-8">
-    <div class="grid items-center gap-12 lg:grid-cols-12">
+  <div class="mx-auto max-w-6xl px-4 py-14 sm:px-6 sm:py-20 lg:px-8">
+    <div class="grid items-center gap-10 lg:grid-cols-12 lg:gap-12">
       <div class="lg:col-span-6">
-        <h2 class="heading-editorial text-3xl text-white sm:text-4xl lg:text-[2.75rem] lg:leading-tight">
+        <h2 class="heading-editorial text-2xl text-white sm:text-4xl lg:text-[2.75rem] lg:leading-tight">
           {t.title}
         </h2>
-        <p class="mt-4 max-w-lg text-base leading-8 text-white/75">
+        <p class="mt-4 max-w-lg text-sm leading-8 text-white/75 sm:text-base">
           {t.subtitle}
         </p>
-        <div class="mt-8 flex flex-wrap items-center gap-3.5">
+        <div class="mt-7 flex flex-wrap items-center gap-3 sm:mt-8 sm:gap-3.5">
           <a
             href={`${prefix}/contact/`}
-            class="inline-flex items-center gap-2 rounded-full bg-aqua px-6 py-3 text-sm font-semibold text-[#06323B] transition-colors hover:bg-aqua-hover"
+            class="inline-flex items-center gap-2 rounded-full bg-aqua px-5 py-2.5 text-sm font-semibold text-[#06323B] transition-colors hover:bg-aqua-hover sm:px-6 sm:py-3"
           >
             <span>{t.primaryBtn}</span>
             <span aria-hidden="true">{arrow}</span>
           </a>
           <a
             href={`${prefix}/philosophy/`}
-            class="inline-flex items-center rounded-full border border-white/25 bg-white/8 px-6 py-3 text-sm font-medium text-white transition-colors hover:bg-white/15"
+            class="inline-flex items-center rounded-full border border-white/25 bg-white/8 px-5 py-2.5 text-sm font-medium text-white transition-colors hover:bg-white/15 sm:px-6 sm:py-3"
           >
             {t.secondaryBtn}
           </a>

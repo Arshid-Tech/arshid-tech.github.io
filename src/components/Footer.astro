@@ -1,89 +1,112 @@
 ---
-import { COMPANY, PROJECTS, UI, type Locale } from '../data/site';
+import { COMPANY, CONTENT, PROJECTS, type Locale } from '../data/site';
 
 interface Props {
   lang: Locale;
 }
 
 const { lang } = Astro.props;
-const f = UI[lang].footer;
-const nav = UI[lang].nav;
-const homeHref = lang === 'fa' ? '/' : '/en/';
-const blogHref = lang === 'fa' ? '/blog/' : '/en/blog/';
-const year = new Date().getFullYear();
+const f = CONTENT[lang].footer;
+const nav = CONTENT[lang].nav;
+const prefix = lang === 'fa' ? '' : '/en';
 const logoSrc =
   lang === 'fa'
-    ? '/images/brand/logo-horizontal-fa.svg'
-    : '/images/brand/logo-horizontal-en.svg';
+    ? '/images/brand/logo-horizontal-fa-white.svg'
+    : '/images/brand/logo-horizontal-en-white.svg';
+const logoWidth = lang === 'fa' ? 226 : 233;
 ---
 
-<footer class="border-t border-border bg-surface text-sm text-muted">
-  <div class="mx-auto max-w-6xl px-4 py-12 sm:px-6 lg:px-8">
+<footer class="border-t border-white/10 bg-nav text-sm text-white/75">
+  <div class="mx-auto max-w-6xl px-4 py-14 sm:px-6 lg:px-8">
     <div class="grid gap-10 md:grid-cols-12">
       <div class="md:col-span-5">
-        <a href={homeHref} class="inline-block no-underline" aria-label={COMPANY.brand[lang]}>
+        <a href={`${prefix}/`} class="inline-block no-underline" aria-label={COMPANY.brand[lang]}>
           <img
             src={logoSrc}
             alt={COMPANY.brand[lang]}
-            class="h-9 w-auto"
-            width="208"
+            class="h-10 w-auto"
+            width={logoWidth}
             height="104"
           />
         </a>
-        <p class="mt-4 text-sm font-bold text-ink">{COMPANY.legalName[lang]}</p>
-        <p class="mt-2.5 leading-relaxed text-muted">{COMPANY.address[lang]}</p>
-        <dl class="mt-4 grid grid-cols-1 gap-1.5 text-xs text-muted sm:grid-cols-2">
-          <div>
-            <dt class="inline font-medium text-ink">{f.regLabel}:</dt>
-            <dd class="inline ps-1">{COMPANY.registrationNumber[lang]}</dd>
-          </div>
-          <div>
-            <dt class="inline font-medium text-ink">{f.nationalIdLabel}:</dt>
-            <dd class="inline ps-1">{COMPANY.nationalId[lang]}</dd>
-          </div>
-          <div class="sm:col-span-2">
-            <dt class="inline font-medium text-ink">{f.postalLabel}:</dt>
-            <dd class="inline ps-1">{COMPANY.postalCode[lang]}</dd>
-          </div>
-        </dl>
+        <p class="mt-4 max-w-sm text-sm leading-7 text-white/70">
+          {COMPANY.tagline[lang]}
+        </p>
+        <div class="mt-6 flex items-center gap-2.5">
+          <a
+            href={COMPANY.githubOrg}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="GitHub"
+            class="inline-flex h-9 w-9 items-center justify-center rounded-lg bg-white/10 text-white/85 transition-colors hover:bg-white/18 hover:text-white"
+          >
+            <svg class="h-4 w-4" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0 1 12 6.844a9.59 9.59 0 0 1 2.504.337c1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.02 10.02 0 0 0 22 12.017C22 6.484 17.522 2 12 2Z" />
+            </svg>
+          </a>
+          <a
+            href={`mailto:${COMPANY.email}`}
+            aria-label="Email"
+            class="inline-flex h-9 w-9 items-center justify-center rounded-lg bg-white/10 text-white/85 transition-colors hover:bg-white/18 hover:text-white"
+          >
+            <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+              <rect x="2" y="4" width="20" height="16" rx="2"></rect>
+              <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path>
+            </svg>
+          </a>
+        </div>
       </div>
 
-      <div class="md:col-span-4">
-        <p class="font-semibold text-ink">{f.productsHeading}</p>
-        <ul class="mt-3 space-y-2">
+      <div class="md:col-span-2">
+        <p class="font-semibold text-white">{f.companyHeading}</p>
+        <ul class="mt-4 space-y-2.5 text-white/70">
+          <li><a href={`${prefix}/philosophy/`} class="transition-colors hover:text-white">{nav.philosophy}</a></li>
+          <li><a href={`${prefix}/portfolio/`} class="transition-colors hover:text-white">{nav.portfolio}</a></li>
+          <li><a href={`${prefix}/blog/`} class="transition-colors hover:text-white">{nav.blog}</a></li>
+        </ul>
+      </div>
+
+      <div class="md:col-span-3">
+        <p class="font-semibold text-white">{f.productsHeading}</p>
+        <ul class="mt-4 space-y-2.5 text-white/70">
           {PROJECTS.map((project) => (
             <li>
               <a
                 href={project.url[lang]}
                 target={project.external ? '_blank' : undefined}
                 rel={project.external ? 'noopener noreferrer' : undefined}
-                class="transition-colors hover:text-primary"
+                class="transition-colors hover:text-white"
               >
                 {project.name}
-                <span class="ms-1.5 text-xs text-muted/80" dir="ltr">({project.domainLabel})</span>
               </a>
             </li>
           ))}
         </ul>
       </div>
 
-      <div class="md:col-span-3">
-        <p class="font-semibold text-ink">{f.linksHeading}</p>
-        <ul class="mt-3 space-y-2">
-          <li><a href={`${homeHref}#services`} class="transition-colors hover:text-primary">{nav.services}</a></li>
-          <li><a href={blogHref} class="transition-colors hover:text-primary">{nav.blog}</a></li>
-          <li><a href={`mailto:${COMPANY.email}`} class="transition-colors hover:text-primary" dir="ltr">{COMPANY.email}</a></li>
+      <div class="md:col-span-2">
+        <p class="font-semibold text-white">{f.contactHeading}</p>
+        <ul class="mt-4 space-y-2.5 text-white/70">
           <li>
-            <a href={COMPANY.githubOrg} target="_blank" rel="noopener noreferrer" class="transition-colors hover:text-primary">
-              GitHub / Arshid-Tech
+            <a href={`${prefix}/contact/`} class="inline-flex items-center gap-2 transition-colors hover:text-white">
+              <svg class="h-4 w-4 opacity-80" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                <rect x="2" y="4" width="20" height="16" rx="2"></rect>
+                <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path>
+              </svg>
+              <span>{f.getInTouch}</span>
+            </a>
+          </li>
+          <li>
+            <a href={`mailto:${COMPANY.email}`} class="font-mono text-xs transition-colors hover:text-white" dir="ltr">
+              {COMPANY.email}
             </a>
           </li>
         </ul>
       </div>
     </div>
 
-    <div class="mt-10 flex flex-col items-start justify-between gap-3 border-t border-border pt-6 text-xs text-muted sm:flex-row sm:items-center">
-      <p>&copy; {year} {f.rights}</p>
+    <div class="mt-12 flex flex-col items-start justify-between gap-3 border-t border-white/10 pt-6 text-xs text-white/60 sm:flex-row sm:items-center">
+      <p>{f.rights}</p>
       <p dir="ltr">arshid.tech</p>
     </div>
   </div>

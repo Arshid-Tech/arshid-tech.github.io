@@ -40,24 +40,24 @@ const articleSchema = {
   canonicalPath={`/en/blog/${slug}/`}
   alternateFaPath={`/blog/`}
   alternateEnPath={`/en/blog/${slug}/`}
+  activeNav="blog"
   jsonLd={articleSchema}
 >
-  <article class="py-12 sm:py-16">
+  <article class="py-14 sm:py-20">
     <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
-      <a href="/en/blog/" class="inline-flex items-center gap-1.5 text-xs font-semibold text-muted hover:text-primary">
+      <a href="/en/blog/" class="inline-flex items-center gap-1.5 text-xs font-semibold text-muted hover:text-accent">
         <span aria-hidden="true">←</span>
         <span>Back to Blog</span>
       </a>
 
       <header class="mt-6 border-b border-border pb-8">
         <div class="flex flex-wrap items-center gap-3 text-xs text-muted">
-          <span class="font-medium text-accent">{post.data.category}</span>
-          <span>•</span>
+          <span class="rounded-full bg-accent-soft px-3 py-0.5 font-semibold text-accent">{post.data.category}</span>
           <time datetime={post.data.pubDate.toISOString()}>{formattedDate}</time>
           <span>•</span>
           <span>{post.data.author}</span>
         </div>
-        <h1 class="mt-4 text-2xl font-extrabold leading-snug text-ink sm:text-3xl">
+        <h1 class="heading-editorial mt-5 text-2xl leading-snug text-ink sm:text-4xl">
           {post.data.title}
         </h1>
         <p class="mt-4 text-base leading-8 text-muted">

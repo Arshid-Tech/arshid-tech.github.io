@@ -11,14 +11,27 @@ const nav = UI[lang].nav;
 const homeHref = lang === 'fa' ? '/' : '/en/';
 const blogHref = lang === 'fa' ? '/blog/' : '/en/blog/';
 const year = new Date().getFullYear();
+const logoSrc =
+  lang === 'fa'
+    ? '/images/brand/logo-horizontal-fa.svg'
+    : '/images/brand/logo-horizontal-en.svg';
 ---
 
 <footer class="border-t border-border bg-surface text-sm text-muted">
   <div class="mx-auto max-w-6xl px-4 py-12 sm:px-6 lg:px-8">
     <div class="grid gap-10 md:grid-cols-12">
       <div class="md:col-span-5">
-        <p class="text-base font-bold text-ink">{COMPANY.legalName[lang]}</p>
-        <p class="mt-3 leading-relaxed text-muted">{COMPANY.address[lang]}</p>
+        <a href={homeHref} class="inline-block no-underline" aria-label={COMPANY.brand[lang]}>
+          <img
+            src={logoSrc}
+            alt={COMPANY.brand[lang]}
+            class="h-9 w-auto"
+            width="208"
+            height="104"
+          />
+        </a>
+        <p class="mt-4 text-sm font-bold text-ink">{COMPANY.legalName[lang]}</p>
+        <p class="mt-2.5 leading-relaxed text-muted">{COMPANY.address[lang]}</p>
         <dl class="mt-4 grid grid-cols-1 gap-1.5 text-xs text-muted sm:grid-cols-2">
           <div>
             <dt class="inline font-medium text-ink">{f.regLabel}:</dt>

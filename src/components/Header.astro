@@ -1,25 +1,34 @@
 ---
-import { COMPANY, UI, type Locale } from '../data/site';
+import { COMPANY, CONTENT, type Locale } from '../data/site';
 
 interface Props {
   lang: Locale;
   alternatePath: string;
+  activeNav?: 'home' | 'philosophy' | 'portfolio' | 'blog' | 'contact';
 }
 
-const { lang, alternatePath } = Astro.props;
-const t = UI[lang].nav;
-const homeHref = lang === 'fa' ? '/' : '/en/';
-const blogHref = lang === 'fa' ? '/blog/' : '/en/blog/';
+const { lang, alternatePath, activeNav = 'home' } = Astro.props;
+const t = CONTENT[lang].nav;
+const prefix = lang === 'fa' ? '' : '/en';
+
+const links = [
+  { id: 'home', label: t.home, href: `${prefix}/` },
+  { id: 'philosophy', label: t.philosophy, href: `${prefix}/philosophy/` },
+  { id: 'portfolio', label: t.portfolio, href: `${prefix}/portfolio/` },
+  { id: 'blog', label: t.blog, href: `${prefix}/blog/` },
+  { id: 'contact', label: t.contact, href: `${prefix}/contact/` },
+] as const;
+
 const logoSrc =
   lang === 'fa'
-    ? '/images/brand/logo-horizontal-fa.svg'
-    : '/images/brand/logo-horizontal-en.svg';
+    ? '/images/brand/logo-horizontal-fa-white.svg'
+    : '/images/brand/logo-horizontal-en-white.svg';
 const logoWidth = lang === 'fa' ? 226 : 233;
 ---
 
-<header class="sticky top-0 z-40 border-b border-border bg-surface/95 backdrop-blur-sm">
-  <div class="mx-auto flex h-16 max-w-6xl items-center justify-between px-4 sm:px-6 lg:px-8">
-    <a href={homeHref} class="flex items-center no-underline" aria-label={COMPANY.brand[lang]}>
+<header class="sticky top-0 z-50 bg-nav text-white shadow-sm">
+  <div class="mx-auto flex h-20 max-w-6xl items-center justify-between gap-4 px-4 sm:px-6 lg:px-8">
+    <a href={`${prefix}/`} class="flex shrink-0 items-center no-underline" aria-label={COMPANY.brand[lang]}>
       <img
         src={logoSrc}
         alt={COMPANY.brand[lang]}
@@ -29,30 +38,73 @@ const logoWidth = lang === 'fa' ? 226 : 233;
       />
     </a>
 
-    <nav aria-label="Main navigation" class="hidden items-center gap-7 text-sm font-medium text-muted md:flex">
-      <a href={`${homeHref}#products`} class="transition-colors hover:text-primary">{t.products}</a>
-      <a href={`${homeHref}#services`} class="transition-colors hover:text-primary">{t.services}</a>
-      <a href={blogHref} class="transition-colors hover:text-primary">{t.blog}</a>
-      <a href={`${homeHref}#about`} class="transition-colors hover:text-primary">{t.about}</a>
-      <a href={`${homeHref}#contact`} class="transition-colors hover:text-primary">{t.contact}</a>
+    <nav aria-label="Main navigation" class="hidden items-center gap-1.5 text-sm font-medium md:flex">
+      {links.map((item) => (
+        <a
+          href={item.href}
+          class:list={[
+            'rounded-lg px-3.5 py-2 transition-colors',
+            activeNav === item.id
+              ? 'bg-white/12 text-white'
+              : 'text-white/80 hover:bg-white/8 hover:text-white',
+          ]}
+        >
+          {item.label}
+        </a>
+      ))}
     </nav>
 
-    <div class="flex items-center gap-3">
+    <div class="flex items-center gap-2.5 sm:gap-3">
+      <button
+        type="button"
+        data-theme-toggle
+        aria-label={lang === 'fa' ? 'تغییر تم روشن و تیره' : 'Toggle light and dark theme'}
+        class="inline-flex h-9 w-9 cursor-pointer items-center justify-center rounded-lg border border-white/15 bg-white/5 text-white/85 transition-colors hover:bg-white/12 hover:text-white"
+      >
+        <svg class="hidden h-4 w-4 dark:block" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="4"></circle>
+          <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path>
+        </svg>
+        <svg class="block h-4 w-4 dark:hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+        </svg>
+      </button>
+
       <a
         href={alternatePath}
-        class="inline-flex items-center rounded border border-border bg-bg px-3 py-1.5 text-xs font-semibold text-ink transition-colors hover:border-primary hover:text-primary"
         hreflang={lang === 'fa' ? 'en' : 'fa'}
+        class="inline-flex items-center gap-1.5 rounded-lg px-2.5 py-2 text-xs font-medium text-white/85 transition-colors hover:bg-white/10 hover:text-white sm:text-sm"
       >
-        {t.switchLang}
+        <svg class="h-4 w-4 opacity-80" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+          <circle cx="12" cy="12" r="10"></circle>
+          <path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+        </svg>
+        <span>{t.switchLang}</span>
       </a>
+
       <a
-        href={COMPANY.githubOrg}
-        target="_blank"
-        rel="noopener noreferrer"
-        class="hidden items-center rounded bg-primary px-3.5 py-1.5 text-xs font-medium text-white transition-colors hover:bg-primary-dark sm:inline-flex"
+        href={`${prefix}/contact/`}
+        class="hidden items-center rounded-xl bg-aqua px-4 py-2 text-sm font-semibold text-[#06323B] transition-colors hover:bg-aqua-hover sm:inline-flex"
       >
-        GitHub
+        {t.cta}
       </a>
     </div>
+  </div>
+
+  <!-- Mobile quick nav -->
+  <div class="border-t border-white/10 md:hidden">
+    <nav class="mx-auto flex max-w-6xl items-center justify-between overflow-x-auto px-4 py-2 text-xs font-medium">
+      {links.map((item) => (
+        <a
+          href={item.href}
+          class:list={[
+            'shrink-0 rounded-md px-2.5 py-1.5 transition-colors',
+            activeNav === item.id ? 'bg-white/12 text-white' : 'text-white/75',
+          ]}
+        >
+          {item.label}
+        </a>
+      ))}
+    </nav>
   </div>
 </header>

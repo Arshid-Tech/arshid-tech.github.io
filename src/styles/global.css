@@ -1,26 +1,57 @@
 @import "tailwindcss";
 
 @theme {
-  --color-primary: #0F4C5C;
-  --color-primary-dark: #0A3743;
-  --color-accent: #0D9488;
-  --color-accent-soft: #F0FDFA;
-  --color-bg: #F8FAFC;
-  --color-surface: #FFFFFF;
-  --color-ink: #0F172A;
-  --color-muted: #475569;
-  --color-border: #E2E8F0;
+  --color-canvas: var(--bg-canvas);
+  --color-surface: var(--bg-surface);
+  --color-surface-soft: var(--bg-surface-soft);
+  --color-ink: var(--text-ink);
+  --color-muted: var(--text-muted);
+  --color-border: var(--border-color);
+  --color-primary: var(--brand-primary);
+  --color-accent: var(--brand-accent);
+  --color-accent-soft: var(--brand-accent-soft);
+  --color-aqua: #7CD1DC;
+  --color-aqua-hover: #64C3D0;
+  --color-nav: var(--bg-nav);
 
   --font-fa: "Vazirmatn", system-ui, -apple-system, sans-serif;
-  --font-en: "Inter", system-ui, -apple-system, sans-serif;
+  --font-en: "Plus Jakarta Sans", system-ui, -apple-system, sans-serif;
+  --font-serif-en: "Playfair Display", Georgia, Cambria, serif;
+}
+
+:root {
+  --bg-canvas: #FAF8F5;
+  --bg-surface: #FFFFFF;
+  --bg-surface-soft: #F3F1EC;
+  --bg-nav: #06323B;
+  --text-ink: #06323B;
+  --text-muted: #4A6066;
+  --border-color: #E6E2DA;
+  --brand-primary: #06323B;
+  --brand-accent: #0D7A8A;
+  --brand-accent-soft: #E6F4F6;
+}
+
+html.dark {
+  --bg-canvas: #07161B;
+  --bg-surface: #0C2229;
+  --bg-surface-soft: #102B33;
+  --bg-nav: #041D23;
+  --text-ink: #F1F6F7;
+  --text-muted: #A9BEC4;
+  --border-color: #193842;
+  --brand-primary: #7CD1DC;
+  --brand-accent: #5BC4D2;
+  --brand-accent-soft: #11343D;
 }
 
 @layer base {
   html {
-    background-color: var(--color-bg);
-    color: var(--color-ink);
+    background-color: var(--bg-canvas);
+    color: var(--text-ink);
     scroll-behavior: smooth;
     -webkit-font-smoothing: antialiased;
+    transition: background-color 0.2s ease, color 0.2s ease;
   }
 
   html[lang="fa"] {
@@ -32,32 +63,53 @@
   }
 }
 
+.heading-editorial {
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+html[lang="en"] .heading-editorial {
+  font-family: var(--font-serif-en);
+  letter-spacing: -0.015em;
+}
+
+.cta-gradient {
+  background: radial-gradient(circle at 65% 25%, #165B69 0%, #093B46 48%, #05262E 100%);
+}
+
+html.dark .cta-gradient {
+  background: radial-gradient(circle at 65% 25%, #114A56 0%, #072E37 50%, #041C22 100%);
+}
+
 .article-prose {
-  color: var(--color-ink);
+  color: var(--text-ink);
   line-height: 1.95;
   font-size: 1.05rem;
 }
 
 .article-prose h2 {
-  font-size: 1.45rem;
+  font-size: 1.5rem;
   font-weight: 700;
-  color: var(--color-ink);
+  color: var(--text-ink);
   margin-top: 2.25rem;
   margin-bottom: 0.85rem;
-  letter-spacing: -0.01em;
+}
+
+html[lang="en"] .article-prose h2 {
+  font-family: var(--font-serif-en);
 }
 
 .article-prose h3 {
   font-size: 1.15rem;
   font-weight: 600;
-  color: var(--color-primary);
+  color: var(--brand-accent);
   margin-top: 1.75rem;
   margin-bottom: 0.65rem;
 }
 
 .article-prose p {
   margin-bottom: 1.25rem;
-  color: #1E293B;
+  color: var(--text-muted);
 }
 
 .article-prose ul,
@@ -76,27 +128,28 @@
 
 .article-prose li {
   margin-bottom: 0.5rem;
-  color: #1E293B;
+  color: var(--text-muted);
 }
 
 .article-prose a {
-  color: var(--color-primary);
+  color: var(--brand-accent);
   text-decoration: underline;
   text-underline-offset: 3px;
 }
 
 .article-prose blockquote {
-  border-inline-start: 3px solid var(--color-accent);
-  background-color: #FFFFFF;
-  padding: 0.9rem 1.2rem;
+  border-inline-start: 3px solid var(--brand-accent);
+  background-color: var(--bg-surface);
+  padding: 1rem 1.25rem;
+  border-radius: 0.5rem;
   margin: 1.5rem 0;
-  color: var(--color-muted);
+  color: var(--text-muted);
 }
 
 .article-prose code {
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
   font-size: 0.9em;
-  background-color: #F1F5F9;
+  background-color: var(--bg-surface-soft);
   padding: 0.15rem 0.35rem;
   border-radius: 4px;
   direction: ltr;
@@ -104,10 +157,10 @@
 }
 
 .article-prose pre {
-  background-color: #0F172A;
-  color: #F8FAFC;
+  background-color: #062127;
+  color: #F1F6F7;
   padding: 1rem 1.25rem;
-  border-radius: 6px;
+  border-radius: 0.75rem;
   overflow-x: auto;
   margin: 1.5rem 0;
   direction: ltr;

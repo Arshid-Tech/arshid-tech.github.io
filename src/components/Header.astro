@@ -27,12 +27,12 @@ const logoWidth = lang === 'fa' ? 226 : 233;
 ---
 
 <header class="sticky top-0 z-50 bg-nav text-white shadow-sm">
-  <div class="mx-auto flex h-20 max-w-6xl items-center justify-between gap-4 px-4 sm:px-6 lg:px-8">
+  <div class="mx-auto flex h-16 max-w-6xl items-center justify-between gap-3 px-4 sm:h-20 sm:gap-4 sm:px-6 lg:px-8">
     <a href={`${prefix}/`} class="flex shrink-0 items-center no-underline" aria-label={COMPANY.brand[lang]}>
       <img
         src={logoSrc}
         alt={COMPANY.brand[lang]}
-        class="h-10 w-auto sm:h-11"
+        class="h-8 w-auto sm:h-11"
         width={logoWidth}
         height="104"
       />
@@ -54,7 +54,7 @@ const logoWidth = lang === 'fa' ? 226 : 233;
       ))}
     </nav>
 
-    <div class="flex items-center gap-2.5 sm:gap-3">
+    <div class="flex shrink-0 items-center gap-2 sm:gap-3">
       <button
         type="button"
         data-theme-toggle
@@ -73,7 +73,7 @@ const logoWidth = lang === 'fa' ? 226 : 233;
       <a
         href={alternatePath}
         hreflang={lang === 'fa' ? 'en' : 'fa'}
-        class="inline-flex items-center gap-1.5 rounded-lg px-2.5 py-2 text-xs font-medium text-white/85 transition-colors hover:bg-white/10 hover:text-white sm:text-sm"
+        class="inline-flex items-center gap-1.5 rounded-lg px-2 py-2 text-xs font-medium text-white/85 transition-colors hover:bg-white/10 hover:text-white sm:px-2.5 sm:text-sm"
       >
         <svg class="h-4 w-4 opacity-80" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
           <circle cx="12" cy="12" r="10"></circle>
@@ -93,13 +93,13 @@ const logoWidth = lang === 'fa' ? 226 : 233;
 
   <!-- Mobile quick nav -->
   <div class="border-t border-white/10 md:hidden">
-    <nav class="mx-auto flex max-w-6xl items-center justify-between overflow-x-auto px-4 py-2 text-xs font-medium">
+    <nav class="mx-auto flex max-w-6xl items-center justify-between gap-1 overflow-x-auto px-3 py-2 text-xs font-medium">
       {links.map((item) => (
         <a
           href={item.href}
           class:list={[
-            'shrink-0 rounded-md px-2.5 py-1.5 transition-colors',
-            activeNav === item.id ? 'bg-white/12 text-white' : 'text-white/75',
+            'shrink-0 whitespace-nowrap rounded-md px-2.5 py-1.5 transition-colors',
+            activeNav === item.id ? 'bg-white/12 text-white' : 'text-white/75 hover:text-white',
           ]}
         >
           {item.label}
